@@ -5,6 +5,7 @@ import (
     "github.com/antchfx/xmlquery"
     "log"
     "net/http"
+    "regexp"
     "strings"
 )
 
@@ -24,7 +25,12 @@ func checkAuth(name, password string) bool{
         log.Fatal(err)
     }
 
-    user := xmlquery.FindOne(document, fmt.Sprintf("/users/user[name/text()=%s and password/text()=%s]", name, password))
+    regex := regexp.MustCompile("[^a-zA-Z0-9]+")
+
+    name = regex.ReplaceAllString(name, "")
+    password = regex.ReplaceAllString(password, "")
+
+    user := xmlquery.FindOne(document, fmt.Sprintf("/users/user[name/text()='%s' and password/text()='%s']", name, password))
 
     return user != nil
 }
